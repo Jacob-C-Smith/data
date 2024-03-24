@@ -16,6 +16,7 @@
 // data
 #include <data/data.h>
 #include <data/key_value.h>
+#include <data/spatial.h>
 
 // Global
 bool preserve_databases = false;
@@ -63,6 +64,16 @@ void parse_command_line_arguments ( int argc, const char *argv[], bool *examples
  */
 int data_key_value_example ( int argc, const char *argv[] );
 
+/** !
+ * Spatial database example program
+ * 
+ * @param argc the argc parameter of the entry point
+ * @param argv the argv parameter of the entry point
+ * 
+ * @return 1 on success, 0 on error
+ */
+int data_spatial_example ( int argc, const char *argv[] );
+
 // Entry point
 int main ( int argc, const char *argv[] )
 {
@@ -105,7 +116,13 @@ int main ( int argc, const char *argv[] )
     if ( examples_to_run[DATA_KEY_VALUE_EXAMPLE] )
 
         // Error check
-        if ( data_key_value_example(argc, argv) == 0 ) goto failed_to_run_key_value_example;
+        // ;if ( data_key_value_example(argc, argv) == 0 ) goto failed_to_run_key_value_example;
+    
+    // Run the spatial example program
+    if ( examples_to_run[DATA_SPATIAL_EXAMPLE] )
+
+        // Error check
+        if ( data_spatial_example(argc, argv) == 0 ) goto failed_to_run_spatial_example;
 
     // Clean up data
     data_quit();
@@ -128,6 +145,14 @@ int main ( int argc, const char *argv[] )
 
             // Print an error message
             printf("Failed to run key value example!\n");
+
+            // Error
+            return EXIT_FAILURE;
+
+        failed_to_run_spatial_example:
+
+            // Print an error message
+            printf("Failed to run spatial example!\n");
 
             // Error
             return EXIT_FAILURE;
@@ -311,6 +336,41 @@ int data_key_value_example ( int argc, const char *argv[] )
         // Remove the file
         remove("key_value.db");
     */
+
+    // Success
+    return 1;
+
+    // Error handling
+    {
+
+        // Data errors
+        {
+            
+        }
+    }
+}
+
+
+int data_spatial_example ( int argc, const char *argv[] )
+{
+    
+    // Supress warnings
+    (void) argc;
+    (void) argv;
+
+    // Formatting
+    printf(
+        "╭─────────────────╮\n"\
+        "│ spatial example │\n"\
+        "╰─────────────────╯\n"\
+        "TODO: Describe example.\n\n"
+    );
+
+    // Initialized data
+    data_spatial *p_spatial = (void *) 0;
+
+    // Create a spatial database
+
 
     // Success
     return 1;
