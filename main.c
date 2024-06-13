@@ -16,6 +16,7 @@
 // data
 #include <data/data.h>
 #include <data/key_value.h>
+#include <data/relational.h>
 #include <data/spatial.h>
 
 // Global
@@ -65,6 +66,16 @@ void parse_command_line_arguments ( int argc, const char *argv[], bool *examples
 int data_key_value_example ( int argc, const char *argv[] );
 
 /** !
+ * Relational database example program
+ * 
+ * @param argc the argc parameter of the entry point
+ * @param argv the argv parameter of the entry point
+ * 
+ * @return 1 on success, 0 on error
+ */
+int data_relational_example ( int argc, const char *argv[] );
+
+/** !
  * Spatial database example program
  * 
  * @param argc the argc parameter of the entry point
@@ -83,9 +94,6 @@ int main ( int argc, const char *argv[] )
 
     // Parse command line arguments
     parse_command_line_arguments(argc, argv, examples_to_run);
-
-    // Initialize parallel
-    if ( data_init() == 0 ) goto failed_to_initialize_data;
 
     // Formatting
     printf(
@@ -113,7 +121,31 @@ int main ( int argc, const char *argv[] )
     //////////////////////
 
     // Run the key value example program
-    if ( examples_to_run[DATA_KEY_VALUE_EXAMPLE] )
+    if ( examples_to_run[DATA_KEY_VALUE_EXAMPLE] ) { }
+
+        // Error check
+        // ;if ( data_key_value_example(argc, argv) == 0 ) goto failed_to_run_key_value_example;
+    
+    // Run the wide column example program
+    if ( examples_to_run[DATA_WIDE_COLUMN_EXAMPLE] ) { }
+
+        // Error check
+        // ;if ( data_key_value_example(argc, argv) == 0 ) goto failed_to_run_key_value_example;
+    
+    // Run the document example program
+    if ( examples_to_run[DATA_DOCUMENT_EXAMPLE] ) { }
+
+        // Error check
+        // ;if ( data_key_value_example(argc, argv) == 0 ) goto failed_to_run_key_value_example;
+    
+    // Run the relational example program
+    if ( examples_to_run[DATA_RELATIONAL_EXAMPLE] )
+
+        // Error check
+        if ( data_relational_example(argc, argv) == 0 ) goto failed_to_run_relational_example;
+
+    // Run the graph example program
+    if ( examples_to_run[DATA_GRAPH_EXAMPLE] ) { }
 
         // Error check
         // ;if ( data_key_value_example(argc, argv) == 0 ) goto failed_to_run_key_value_example;
@@ -148,6 +180,14 @@ int main ( int argc, const char *argv[] )
 
             // Error
             return EXIT_FAILURE;
+
+        failed_to_run_relational_example:
+
+            // Print an error message
+            printf("Failed to run relational example!\n");
+
+            // Error
+            return EXIT_FAILURE;        
 
         failed_to_run_spatial_example:
 
@@ -205,7 +245,7 @@ void parse_command_line_arguments ( int argc, const char *argv[], bool *examples
 
         // Relational example?
         else if ( strcmp(argv[i], "relational") == 0 )
-
+        
             // Set the schedule example flag
             examples_to_run[DATA_RELATIONAL_EXAMPLE] = true;
         
@@ -280,7 +320,7 @@ int data_key_value_example ( int argc, const char *argv[] )
     );
 
     // Initialized data
-    data_key_value *p_key_value = (void *) 0;
+    key_value_db *p_key_value = (void *) 0;
     void *p_key   = (void *) 0,
          *p_value = (void *) 0;
 
@@ -350,6 +390,45 @@ int data_key_value_example ( int argc, const char *argv[] )
     }
 }
 
+int data_relational_example ( int argc, const char *argv[] )
+{
+    
+    // Supress warnings
+    (void) argc;
+    (void) argv;
+
+    // Formatting
+    printf(
+        "╭─────────────────╮\n"\
+        "│ OUЯ SQL example │\n"\
+        "╰─────────────────╯\n"\
+        "TODO: Describe example.\n\n"
+    );
+
+    // Initialized data
+    //data_relational *p_relational = (void *) 0;
+    data_relational_statement *p_statement = (void *) 0;
+
+    data_relational_parse_statement("CREATE TABLE test (ID int NOT NULL PRIMARY KEY, A int, B int);", 0, &p_statement);
+
+    // Clean up
+    if ( preserve_databases == false ) 
+
+        // Remove the file
+        remove("relational.db");
+
+    // Success
+    return 1;
+
+    // Error handling
+    {
+
+        // Data errors
+        {
+            
+        }
+    }
+}
 
 int data_spatial_example ( int argc, const char *argv[] )
 {
