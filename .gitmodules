@@ -13,9 +13,6 @@
 [submodule "extern/log"]
 	path = extern/log
 	url = https://github.com/Jacob-C-Smith/log
-[submodule "extern/crypto"]
-	path = extern/crypto
-	url = https://github.com/Jacob-C-Smith/crypto
 [submodule "extern/table"]
 	path = extern/table
 	url = https://github.com/Jacob-C-Smith/table
@@ -25,3 +22,6 @@
 [submodule "extern/tuple"]
 	path = extern/tuple
 	url = https://github.com/Jacob-C-Smith/tuple
+[submodule "extern/hash-cache"]
+	path = extern/hash-cache
+	url = https://github.com/Jacob-C-Smith/hash-cache
