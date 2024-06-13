@@ -1,0 +1,22 @@
+declare classes
+set classes:0 {"code":"COMM 101","title":"Fundamentals of Oral Communication","description":"A theoretical and contextual overview of the communication discipline...","max_students":20}
+set classes:1 {"code":"ENGL 101","title":"Writing and Rhetoric I","description":"Develops students' knowledge of what writing is and how it functions in the world...","max_students":30}
+set classes:2 {"code":"ENGL 102","title":"Writing and Rhetoric II","description":"Develops students' understanding of how rhetoric functions in academic and public environments...","max_students":35}
+set classes:3 {"code":"WRITE 212","title":"Introduction to Technical Communication","description":"Students design and create practical documents and presentations relevant to the workplace and courses in their majors...","max_students":15}
+set classes:4 {"code":"MATH 170","title":"Calculus I","description":"Informal limits and continuity. Derivatives and antiderivatives...","max_students":4}
+set classes:5 {"code":"MATH 175","title":"Calculus II","description":"A continuation of MATH 170. Techniques of integration and calculation of antiderivatives...","max_students":10}
+
+declare students
+set students:0  {"first_name":"Alice","last_name":"Agnesi","birth_date":"1991-01-01"}
+set students:1  {"first_name":"Bob","last_name":"Babbage","birth_date":"1992-02-02"}
+set students:2  {"first_name":"Carol","last_name":"Carson","birth_date":"1993-03-03"}
+set students:3  {"first_name":"Daniel","last_name":"Dijkstra","birth_date":"1994-04-04"}
+set students:4  {"first_name":"Emmett","last_name":"Einstein","birth_date":"1995-05-05"}
+set students:5  {"first_name":"Fiona","last_name":"Faraday","birth_date":"1996-06-06"}
+set students:6  {"first_name":"George","last_name":"Galois","birth_date":"1997-07-07"}
+set students:7  {"first_name":"Hannah","last_name":"Hamilton","birth_date":"1998-08-08"}
+set students:8  {"first_name":"Isaac","last_name":"Ishizaka","birth_date":"1999-09-09"}
+set students:9  {"first_name":"Jessica","last_name":"Jackson","birth_date":"2000-10-10"}
+set students:10 {"first_name":"Wilbur","last_name":"Wright","birth_date":"1867-04-16"}
+set students:11 {"first_name":"Walter","last_name":"Wu","birth_date":"1912-05-31"}
+
