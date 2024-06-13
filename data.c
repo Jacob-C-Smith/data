@@ -1,10 +1,31 @@
- 
-int data_init ( void )
+/** !
+ * Implements general database functions 
+ * 
+ * @file data.c
+ * 
+ * @author Jacob Smith
+ */ 
+
+// Header
+#include <data/data.h>
+
+void data_init ( void )
 {
-    return 1;
+
+    // Initialize libraries
+    log_init();
+    sync_init();
+    dict_init();
+    hash_cache_init();
+    json_init();
+
+    // Done
+    return;
 }
 
-int data_quit ( void )
+void data_quit ( void )
 {
-    return 1;
+
+    // Done
+    return;
 }
