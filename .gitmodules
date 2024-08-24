@@ -25,3 +25,6 @@
 [submodule "extern/hash-cache"]
 	path = extern/hash-cache
 	url = https://github.com/Jacob-C-Smith/hash-cache
+[submodule "extern/tree"]
+	path = extern/tree
+	url = https://github.com/Jacob-C-Smith/tree
