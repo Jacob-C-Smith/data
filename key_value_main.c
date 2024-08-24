@@ -40,6 +40,18 @@ int key_value_db_early ( void );
  */
 int print_prompt ( void );
 
+int key_get ( const char *p_key, json_value *p_value )
+{
+
+    if ( p_value == 0 ) return 0;
+    if ( p_value->type != JSON_VALUE_STRING ) return 0;
+    if ( p_value->string == 0 ) return 0;
+    if ( strcmp(p_value->string, p_key) ) return 0;
+
+    // Success
+    return 1;
+}
+
 // Data
 char _prompt[KEY_VALUE_DB_SHELL_PROMPT_MAX] = { ' ', '$', '?', ' ', ' ', '$', '$', ' ', '\0' };
 int last_result = 1;
@@ -55,8 +67,13 @@ int main ( int argc, const char *argv[] )
     // Initialized data
     char _input[KEY_VALUE_DB_SHELL_INPUT_MAX] = { 0 };
     key_value_db *p_key_value_db = (void *) 0;
+    key_value_db_create_info _key_value_db_create_info =
+    {
+        .pfn_key_get = key_get
+    };
 
-    key_value_db_construct(&p_key_value_db);
+    // Construct the database
+    key_value_db_construct(&p_key_value_db, &_key_value_db_create_info);
 
     // Read, Evaluate, Print loop
     while( !feof(stdin) )
@@ -71,13 +88,11 @@ int main ( int argc, const char *argv[] )
         // Add a null terminator
         _input[strlen(_input) - 1] = '\0';
 
-        // Evaluate
-        {
-            if ( strncmp(_input, "exit", KEY_VALUE_DB_SHELL_PROMPT_MAX) == 0 ) break;
-            
-            last_result = key_value_db_parse_statement(p_key_value_db,_input);
-
-        }
+        // Continuation condition
+        if ( strncmp(_input, "exit", KEY_VALUE_DB_SHELL_PROMPT_MAX) == 0 ) break;
+        
+        // Evaluate            
+        last_result = key_value_db_parse_statement(p_key_value_db, _input);
 
         // Print
         //
@@ -85,6 +100,9 @@ int main ( int argc, const char *argv[] )
 
     // Formatting
     putchar('\r');
+
+    // Save the database to the disk
+    //key_value_db_write(p_key_value_db,"");
 
     // Success
     return EXIT_SUCCESS;
