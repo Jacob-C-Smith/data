@@ -110,6 +110,19 @@ if ( NOT "${HAS_TUPLE}")
     endif()
 endif()
 
+# Find the tree module
+if ( NOT "${HAS_TREE}")
+
+    # Add the tree directory
+    add_subdirectory(${CMAKE_SOURCE_DIR}/extern/tree ${CMAKE_SOURCE_DIR}/build/tree)
+
+    # Let any parent project know that it has the tree project
+    if(NOT PROJECT_IS_TOP_LEVEL)
+        set(HAS_TREE true PARENT_SCOPE)
+        set(TREE_INCLUDE_DIR ${TREE_INCLUDE_DIR} PARENT_SCOPE)
+    endif()
+endif()
+
 # Find the data module
 if ( NOT "${HAS_DATA}")
 
@@ -140,6 +153,6 @@ target_link_libraries(key_value_db data base64 json array dict sync log)
 
 # Add source to this project's library
 add_library (data SHARED "data.c" "key_value.c" "relational.c" "spatial.c")
-add_dependencies(data json base64 array dict sync log)
+add_dependencies(data tree json base64 array dict sync log)
 target_include_directories(data PUBLIC ${DATA_INCLUDE_DIR} ${JSON_INCLUDE_DIR} ${ARRAY_INCLUDE_DIR} ${HASH_CACHE_INCLUDE_DIR} ${DICT_INCLUDE_DIR} ${SYNC_INCLUDE_DIR} ${BASE64_INCLUDE_DIR} ${TUPLE_INCLUDE_DIR} ${LOG_INCLUDE_DIR})
-target_link_libraries(data PUBLIC json base64 array dict sync log)
+target_link_libraries(data PUBLIC tree json base64 array dict sync log)
