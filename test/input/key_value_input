@@ -1,0 +1,22 @@
+# Data types
+set integer 123
+set number  3.14  
+set string  "I love you, mother"
+set object  {"name":"eddy"}
+set array   [123,3.14,"I love you, mother",{"name":"eddy"}]
+
+# Animals
+set animals:0 {"name":"eddy","type":"dog"}
+set animals:1 {"name":"nami","type":"dog"}
+set animals:2 {"name":"blossom","type":"dog"}
+set animals:3 {"name":"bubbles","type":"dog"}
+set animals:4 {"name":"boo boo","type":"dog"}
+set animals:5 {"name":"reba","type":"dog"}
+
+# Write the properties to a file
+write
+
+# List the properties
+list
+
+# [[[EOF]]]

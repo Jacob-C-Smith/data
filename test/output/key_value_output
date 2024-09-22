@@ -1,0 +1,12 @@
+ [92m✔[0m  $  [91m✘[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [91m✘[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [92m✔[0m  $  [91m✘[0m  $  [92m✔[0m  $  [92m✔[0m  $  [91m✘[0m  $ string : "I love you, mother"
+object : {"":"eddy"}
+number : 3.14
+integer : 123
+array : [123,3.14,"I love you, mother",{"":"eddy"}]
+animals:5 : {"":"reba","":"dog"}
+animals:4 : {"":"boo boo","":"dog"}
+animals:3 : {"":"bubbles","":"dog"}
+animals:2 : {"":"blossom","":"dog"}
+animals:1 : {"":"nami","":"dog"}
+animals:0 : {"":"eddy","":"dog"}
+ [92m✔[0m  $  [92m✔[0m  $ 
