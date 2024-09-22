@@ -56,6 +56,27 @@ int key_get ( const char *p_key, json_value *p_value )
 char _prompt[KEY_VALUE_DB_SHELL_PROMPT_MAX] = { ' ', '$', '?', ' ', ' ', '$', '$', ' ', '\0' };
 int last_result = 1;
 
+// Forward declarations
+/** !
+ * Print a usage message to standard out
+ * 
+ * @param argv0 the name of the program
+ * 
+ * @return void
+ */
+void print_usage ( const char *argv0 );
+
+/** !
+ * Parse command line arguments program
+ * 
+ * @param argc             the argc parameter of the entry point
+ * @param argv             the argv parameter of the entry point
+ * @param pp_database_path result
+ * 
+ * @return 1 on success, 0 on error
+ */
+int parse_arguments ( int argc, const char *argv[], const char **pp_database_path );
+
 // Entry point
 int main ( int argc, const char *argv[] )
 {
@@ -65,12 +86,13 @@ int main ( int argc, const char *argv[] )
     (void) argv;
 
     // Initialized data
-    char _input[KEY_VALUE_DB_SHELL_INPUT_MAX] = { 0 };
-    key_value_db *p_key_value_db = (void *) 0;
-    key_value_db_create_info _key_value_db_create_info =
-    {
-        .pfn_key_get = key_get
-    };
+    char                      _input[KEY_VALUE_DB_SHELL_INPUT_MAX] = { 0 };
+    char                     *p_database_file_path = (void *) 0;
+    key_value_db             *p_key_value_db = (void *) 0;
+    key_value_db_create_info  _key_value_db_create_info = { .pfn_key_get = key_get };
+
+    // Parse command line arguments
+    parse_arguments(argc, argv, &_key_value_db_create_info.p_database_file);
 
     // Construct the database
     key_value_db_construct(&p_key_value_db, &_key_value_db_create_info);
@@ -81,6 +103,9 @@ int main ( int argc, const char *argv[] )
         
         // Prompt
         print_prompt();
+
+        // Clear
+        memset(_input, 0, KEY_VALUE_DB_SHELL_INPUT_MAX);
 
         // Read a line from standard in
         fgets(_input, KEY_VALUE_DB_SHELL_INPUT_MAX, stdin);
@@ -106,6 +131,47 @@ int main ( int argc, const char *argv[] )
 
     // Success
     return EXIT_SUCCESS;
+}
+
+void print_usage ( const char *argv0 )
+{
+
+    // Argument check
+    if ( argv0 == (void *) 0 ) exit(EXIT_FAILURE);
+
+    // Print a usage message to standard out
+    printf("Usage: %s database_file\n", argv0);
+
+    // Done
+    return;
+}
+
+int parse_arguments ( int argc, const char *argv[], const char **pp_database_path )
+{
+
+    // Argument check
+    if ( argc != 2 ) goto missing_command_line_arguments;
+
+    // Store the database name
+    *pp_database_path = argv[1];
+
+    // Success
+    return 1;
+
+    // Error handling
+    {
+
+        // Argument errors
+        {
+            missing_command_line_arguments:
+                
+                // Print a usage message to standard out
+                print_usage(argv[0]);
+
+                // Abort execution
+                exit(EXIT_FAILURE);
+        }
+    }
 }
 
 int key_value_db_early ( void )

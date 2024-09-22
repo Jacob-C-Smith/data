@@ -31,17 +31,25 @@
 // data module
 #include <data/data.h>
 
+// Preprocessor definitions
+#define KEY_VALUE_DB_PROPERTY_KEY_LENGTH_MAX   31   + 1
+#define KEY_VALUE_DB_PROPERTY_VALUE_LENGTH_MAX 1023 + 1
+#define KEY_VALUE_DB_NODE_SIZE_BYTES           (KEY_VALUE_DB_PROPERTY_VALUE_LENGTH_MAX + KEY_VALUE_DB_PROPERTY_KEY_LENGTH_MAX)
+
 // Structure declarations
 struct key_value_db_s;
+struct key_value_db_property_s;
 
 // Type definitions
-typedef struct key_value_db_s       key_value_db;
+typedef struct key_value_db_s          key_value_db;
+typedef struct key_value_db_property_s key_value_db_property;
 typedef int (*fn_key_value_db_key_get)(const char *p_key, json_value *p_value);
 typedef struct
 {
     fn_tree_equal            *pfn_key_get;
     fn_binary_tree_parse     *pfn_value_parse;
-    fn_binary_tree_serialize *pfn_value_serialize;    
+    fn_binary_tree_serialize *pfn_value_serialize;
+    char                     *p_database_file;
 
 } key_value_db_create_info;
 
@@ -76,5 +84,5 @@ DLLEXPORT int key_value_db_delete ( key_value_db *p_key_value_db, char *p_db_key
 DLLEXPORT int key_value_db_write ( key_value_db *p_key_value_db, const char *p_path );
 
 // Parse statement
-DLLEXPORT int key_value_db_parse_statement ( key_value_db *p_key_value, char *p_instruction );
+DLLEXPORT int key_value_db_parse_statement ( key_value_db *p_key_value, char *p_input, char *p_output );
 
