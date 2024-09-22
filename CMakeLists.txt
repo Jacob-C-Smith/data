@@ -2,7 +2,7 @@
 cmake_minimum_required (VERSION 3.28)
 
 # This is the name of the repository
-project ("json")
+project ("data")
 
 # Set the correct paths
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
@@ -68,6 +68,19 @@ if ( NOT "${HAS_SYNC}")
     if(NOT PROJECT_IS_TOP_LEVEL)
         set(HAS_SYNC true PARENT_SCOPE)
         set(SYNC_INCLUDE_DIR ${SYNC_INCLUDE_DIR} PARENT_SCOPE)
+    endif()
+endif()
+
+# Find the socket module
+if ( NOT "${HAS_SOCKET}")
+
+    # Add the socket directory
+    add_subdirectory(${CMAKE_SOURCE_DIR}/extern/socket ${CMAKE_SOURCE_DIR}/build/socket)
+
+    # Let any parent project know that it has the socket project
+    if(NOT PROJECT_IS_TOP_LEVEL)
+        set(HAS_SOCKET true PARENT_SCOPE)
+        set(SOCKET_INCLUDE_DIR ${SOCKET_INCLUDE_DIR} PARENT_SCOPE)
     endif()
 endif()
 
