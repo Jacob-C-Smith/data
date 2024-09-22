@@ -28,3 +28,9 @@
 [submodule "extern/tree"]
 	path = extern/tree
 	url = https://github.com/Jacob-C-Smith/tree
+[submodule "extern/socket"]
+	path = extern/socket
+	url = https://github.com/Jacob-C-Smith/socket
+[submodule "extern/parallel"]
+	path = extern/parallel
+	url = https://github.com/Jacob-C-Smith/parallel
