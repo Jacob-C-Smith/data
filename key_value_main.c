@@ -87,6 +87,7 @@ int main ( int argc, const char *argv[] )
 
     // Initialized data
     char                      _input[KEY_VALUE_DB_SHELL_INPUT_MAX] = { 0 };
+    char                      _output[512] = { 0 };    
     char                     *p_database_file_path = (void *) 0;
     key_value_db             *p_key_value_db = (void *) 0;
     key_value_db_create_info  _key_value_db_create_info = { .pfn_key_get = key_get };
@@ -117,7 +118,7 @@ int main ( int argc, const char *argv[] )
         if ( strncmp(_input, "exit", KEY_VALUE_DB_SHELL_PROMPT_MAX) == 0 ) break;
         
         // Evaluate            
-        last_result = key_value_db_parse_statement(p_key_value_db, _input);
+        key_value_db_parse_statement(p_key_value_db, _input, _output);
 
         // Print
         //

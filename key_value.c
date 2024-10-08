@@ -107,7 +107,6 @@ int key_value_db_construct ( key_value_db **pp_key_value_db, key_value_db_create
 
     // Allocate a key value database
     if ( key_value_db_create(&p_key_value_db) == 0 ) goto failed_to_allocate_key_value_db;
-
     // Store the database file path
     strncpy(&p_key_value_db->_database_file, p_key_value_db_create_info->p_database_file, strlen(p_key_value_db_create_info->p_database_file));
 
@@ -357,6 +356,17 @@ int key_value_db_property_parse ( FILE *p_file, binary_tree_node *p_binary_tree_
     }
 
 }
+
+int key_value_db_write ( key_value_db *p_key_value_db, const char *p_path )
+{
+
+    // Serialize the database
+    binary_tree_serialize(p_key_value_db->p_binary_tree, &p_key_value_db->_database_file, key_value_db_property_serialize);
+
+    // Success
+    return 1;
+}
+
 int key_value_db_parse_statement ( key_value_db *p_key_value_db, char *p_input, char *p_output )
 {
 
@@ -396,7 +406,7 @@ int key_value_db_parse_statement ( key_value_db *p_key_value_db, char *p_input, 
         char *p_post_value = 0;
         json_value *p_value = 0;
 
-        strtok(p_instruction, " \n");
+        strtok(p_input, " \n");
 
         p_post_key = strtok(0, " \n");
         p_post_value = strtok(0, "\n");
@@ -419,7 +429,7 @@ int key_value_db_parse_statement ( key_value_db *p_key_value_db, char *p_input, 
         char *p_get_key = 0;
         json_value *p_value = 0;
 
-        strtok(p_instruction, " \n");
+        strtok(p_input, " \n");
 
         p_get_key = strtok(0, "\n");
         p_get_key[strlen(p_get_key)]='\0';
