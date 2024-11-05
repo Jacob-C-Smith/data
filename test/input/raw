@@ -1,0 +1,22 @@
+integer
+123
+number
+3.14
+string
+"I love you, mother"
+object
+{"name":"eddy"}
+array
+[123,3.14,"I love you, mother",{"name":"eddy"}]
+animals:0
+{"name":"eddy","type":"dog"}
+animals:1
+{"name":"nami","type":"dog"}
+animals:2
+{"name":"blossom","type":"dog"}
+animals:3
+{"name":"bubbles","type":"dog"}
+animals:4
+{"name":"boo boo","type":"dog"}
+animals:5
+{"name":"reba","type":"dog"}
