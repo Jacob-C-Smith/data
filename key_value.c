@@ -19,13 +19,6 @@ struct key_value_db_s
     char         _database_file[FILENAME_MAX];
 };
 
-struct key_value_db_property_s
-{
-    char        _key[KEY_VALUE_DB_PROPERTY_KEY_LENGTH_MAX];
-    char        _value[KEY_VALUE_DB_PROPERTY_VALUE_LENGTH_MAX];
-    json_value *p_value;
-};
-
 // Function declarations
 // Allocators
 /** !
@@ -100,13 +93,14 @@ int key_value_db_construct ( key_value_db **pp_key_value_db, key_value_db_create
 
     // Argument errors
     if ( pp_key_value_db == (void *) 0 ) goto no_key_value_db;
-
+    /*
     // Initialized data
     key_value_db *p_key_value_db = (void *) 0;
     FILE *p_file = (void *) 0;
 
     // Allocate a key value database
     if ( key_value_db_create(&p_key_value_db) == 0 ) goto failed_to_allocate_key_value_db;
+    
     // Store the database file path
     strncpy(&p_key_value_db->_database_file, p_key_value_db_create_info->p_database_file, strlen(p_key_value_db_create_info->p_database_file));
 
@@ -134,6 +128,7 @@ int key_value_db_construct ( key_value_db **pp_key_value_db, key_value_db_create
 
     // Return a pointer to the caller
     *pp_key_value_db = p_key_value_db;
+    */
 
     // Success
     return 1;
@@ -183,6 +178,7 @@ int key_value_db_post ( key_value_db *p_key_value_db, char *p_key, json_value *p
     //
 
     // Initialized data
+    /*
     size_t l = strlen(p_key);
     key_value_db_property *p_property = 0;
 
@@ -203,6 +199,7 @@ int key_value_db_post ( key_value_db *p_key_value_db, char *p_key, json_value *p
 
     // Insert the property into the tree
     binary_tree_insert(p_key_value_db->p_binary_tree, p_property->_key, p_property->p_value);
+    */
 
     // Success
     return 1;
@@ -292,6 +289,7 @@ int key_value_db_property_print ( void *p_key, void *p_value )
 int key_value_db_property_serialize ( FILE *p_f, binary_tree_node *p_binary_tree_node )
 {
 
+    /*
     fwrite(p_binary_tree_node->p_key, 1, 32, p_f);
 
     size_t value_length = json_value_fprint(p_binary_tree_node->p_value, p_f) + 2;
@@ -303,7 +301,7 @@ int key_value_db_property_serialize ( FILE *p_f, binary_tree_node *p_binary_tree
 
         // ... with zeros
         fputc('\0', p_f);
-
+    */
     // Success
     return 1;
 }
@@ -313,7 +311,7 @@ int key_value_db_property_parse ( FILE *p_file, binary_tree_node *p_binary_tree_
 
     // TODO: Argument check
     //
-
+    /*
     // Initialized data
     key_value_db_property *p_property = realloc(0, sizeof(key_value_db_property));
 
@@ -334,7 +332,8 @@ int key_value_db_property_parse ( FILE *p_file, binary_tree_node *p_binary_tree_
 
     p_binary_tree_node->p_key = p_property->_key;
     p_binary_tree_node->p_value = p_property->p_value;
-
+    */
+   
     // Success
     return 1;
 
